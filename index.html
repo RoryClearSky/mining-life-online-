@@ -208,6 +208,9 @@
   .cta h2{font-family:var(--disp);font-weight:900;text-transform:uppercase;font-size:clamp(26px,3.2vw,40px);color:var(--navy);line-height:1.04}
   .cta h2 .gold{color:var(--gold)}
   .cta p{color:var(--muted);font-size:17px;margin:14px auto 26px;max-width:620px}
+  .cta-chips{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:22px}
+  .cta-chip{background:#fff;border:1.5px solid var(--navy);color:var(--navy);font-family:var(--disp);font-weight:700;font-size:15px;padding:11px 22px;border-radius:100px;text-decoration:none;transition:.15s;box-shadow:0 4px 12px rgba(20,40,70,.08)}
+  .cta-chip:hover{background:var(--navy);color:#fff;transform:translateY(-2px)}
   .cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
   .cta-primary{background:var(--navy);color:#fff;font-family:var(--disp);font-weight:800;font-size:16px;padding:15px 32px;border-radius:100px;text-decoration:none;transition:background .15s,transform .15s;box-shadow:0 10px 24px rgba(20,40,70,.18)}
   .cta-primary:hover{background:var(--navy-3);transform:translateY(-2px)}
@@ -544,10 +547,15 @@
   <div class="cta-inner">
     <div class="eyebrow">Founders Special · First 200 Only</div>
     <h2>Join our <span class="gold">Founders</span> and get discovered first.</h2>
-    <p>The first <b>200 businesses</b> to join lock in founding-member pricing and priority placement across CME / CEN-CAN Expos, Mining Life Online, and Mining Life &amp; Exploration News.</p>
+    <p>The first <b>200 businesses</b> to join lock in founding-member pricing and priority placement across all four channels.</p>
+    <div class="cta-chips">
+      <a class="cta-chip" href="https://virtex.canadianminingexpo.com/" target="_blank" rel="noopener">CME Expo 2027</a>
+      <a class="cta-chip" href="https://virtex.cencanexpo.ca/" target="_blank" rel="noopener">CEN CAN Expo 2027</a>
+      <a class="cta-chip" href="https://issuu.com/canadiantradex/docs/ml_summer_2026-2_web" target="_blank" rel="noopener">Mining Exploration News</a>
+      <a class="cta-chip" href="#">Mining Life Online</a>
+    </div>
     <div class="cta-btns">
       <a class="cta-primary" href="book-a-call.html">Book Your Call</a>
-      <a class="cta-secondary" href="https://issuu.com/canadiantradex/docs/ml_summer_2026-2_web" target="_blank" rel="noopener">See the Latest Issue</a>
     </div>
     <div class="cta-note">Limited to the first 200 members — once they're gone, they're gone.</div>
   </div>
