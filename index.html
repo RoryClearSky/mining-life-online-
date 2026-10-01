@@ -181,7 +181,8 @@
   .lev .badge{position:absolute;top:-31px;left:50%;transform:translateX(-50%);margin:0;width:61px;height:61px}
   .lev .badge svg{width:29px;height:29px}
   .lev h4{font-size:15px;font-weight:800;color:var(--navy);text-transform:uppercase;min-height:36px;display:flex;align-items:center;justify-content:center}
-  .lev .desc{font-size:13.5px;color:var(--muted);margin:8px 0 16px;flex:1}
+  .lev .desc{font-size:13.5px;color:var(--muted);margin:8px 0 12px;flex:1}
+  .lev .shot{width:100%;height:92px;object-fit:cover;border-radius:9px;border:1px solid var(--line);margin:0 0 14px}
   .lev .lnum{font-family:var(--disp);font-weight:900;font-size:16px;letter-spacing:.08em;color:#fff;background:linear-gradient(100deg,var(--navy-3),var(--navy));border-radius:8px;padding:8px}
   .lev .ltag{font-family:var(--disp);font-weight:800;font-size:11px;letter-spacing:.13em;color:var(--gold-dk);text-transform:uppercase;margin-top:9px}
 
@@ -438,7 +439,7 @@
   <div class="matters wrap">
     <!-- WHO BENEFITS -->
     <div class="panel">
-      <div class="ph img" style="background-image:linear-gradient(100deg,rgba(19,38,70,.82),rgba(19,38,70,.60)),url('images/handshake.jpg')">Who Benefits</div>
+      <div class="ph">Who Benefits</div>
       <div class="benefits">
         <div class="brow">
           <div class="badge"><svg viewBox="0 0 24 24"><circle class="ic" cx="9" cy="8" r="3"/><path class="ic" d="M3.5 19c0-3 2.5-5 5.5-5s5.5 2 5.5 5"/><circle class="ic" cx="16.5" cy="9" r="2.3"/><path class="ic" d="M15 14.2c2.6.2 5 2.1 5 4.8"/></svg></div>
@@ -457,30 +458,34 @@
 
     <!-- DISCOVERABILITY LEVELS -->
     <div class="panel">
-      <div class="ph img" style="background-image:linear-gradient(100deg,rgba(19,38,70,.82),rgba(19,38,70,.60)),url('images/laptop.jpg')">Discoverability Levels</div>
+      <div class="ph">Discoverability Levels</div>
       <div class="levels">
         <div class="lev">
           <div class="badge"><svg viewBox="0 0 24 24"><circle class="ic" cx="11" cy="11" r="6.5"/><path class="ic" d="M20 20l-4-4"/></svg></div>
           <h4>Presence</h4>
           <p class="desc">Searchable company profile and services.</p>
+          <img class="shot" src="images/laptop.jpg" alt="Searchable company profile on a laptop">
           <div class="lnum">Level 1</div><div class="ltag">Be Found</div>
         </div>
         <div class="lev">
           <div class="badge"><svg viewBox="0 0 24 24"><path class="ic" d="M5 4h11v16H5z"/><path class="ic" d="M16 8h3v10a2 2 0 0 1-2 2h-1"/><path class="ic" d="M8 8h5M8 11h5M8 14h5"/></svg></div>
           <h4>Enhanced Discoverability</h4>
           <p class="desc">Products indexed, microsite, faceted visibility.</p>
+          <img class="shot" src="images/d_mlo.jpg" alt="Mining Life Online product listings">
           <div class="lnum">Level 2</div><div class="ltag">Stand Out</div>
         </div>
         <div class="lev">
           <div class="badge"><svg viewBox="0 0 24 24"><rect class="ic" x="4" y="5" width="16" height="15" rx="2"/><path class="ic" d="M4 9h16M8 3v4M16 3v4"/></svg></div>
           <h4>Connected Discoverability</h4>
           <p class="desc">Event integration, booth discovery, contextual placement, lead capture.</p>
+          <img class="shot" src="images/d_show.jpg" alt="CME Expo trade-show floor">
           <div class="lnum">Level 3</div><div class="ltag">Make Connections</div>
         </div>
         <div class="lev">
           <div class="badge"><svg viewBox="0 0 24 24"><path class="ic" d="M4 20V11M10 20V6M16 20v-9M20 20H3"/></svg></div>
           <h4>Intelligence / Premium</h4>
           <p class="desc">Project matching, buyer-intent analytics, opportunity alerts.</p>
+          <img class="shot" src="images/d_news.jpg" alt="Opportunities across the mining landscape">
           <div class="lnum">Level 4</div><div class="ltag">Turn Opportunities Into Growth</div>
         </div>
       </div>
