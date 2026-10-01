@@ -276,7 +276,7 @@
     </article>
     <!-- MLO -->
     <article class="chan">
-      <div class="photo"><img src="images/mlo.jpg" alt="Mining Life Online on a laptop"><a class="ytbtn" href="https://drive.google.com/drive/u/0/folders/1O53cHtdGr90VN6vs1pPmJs2STdLJEgGO" target="_blank" rel="noopener" aria-label="Watch the Mining Life Online video"></a></div>
+      <div class="photo"><img src="images/mlo.jpg" alt="Mining Life Online on a laptop"><a class="ytbtn" id="mloPlay" href="https://drive.google.com/file/d/1vPNZ0C6jqs8A6c5q98U9eCAKCcOtIvJ4/view" target="_blank" rel="noopener" data-embed="https://drive.google.com/file/d/1vPNZ0C6jqs8A6c5q98U9eCAKCcOtIvJ4/preview" aria-label="Watch the Mining Life Online video"></a></div>
       <div class="badge"><svg viewBox="0 0 24 24"><rect class="ic" x="3" y="5" width="18" height="12" rx="1.5"/><path class="ic" d="M2 20h20"/></svg></div>
       <h3>Mining Life Online</h3>
       <span class="pill">Always-On Digital Discovery</span>
@@ -525,6 +525,35 @@
 </section>
 
 <div class="foot-final">Manitoba &bull; Ontario &bull; Quebec &nbsp;—&nbsp; <b>A Richer Mining Tomorrow.</b> &nbsp;|&nbsp; CME / CEN-CAN Expos &bull; Mining Life Online &bull; Mining Life &amp; Exploration News</div>
+
+<!-- video lightbox -->
+<div class="vmodal" id="vmodal" aria-hidden="true">
+  <div class="vbackdrop" data-close></div>
+  <div class="vframe">
+    <button class="vclose" data-close aria-label="Close video">&times;</button>
+    <div class="vratio"><iframe id="vIframe" src="" title="Mining Life Online video" allow="autoplay; fullscreen" allowfullscreen frameborder="0"></iframe></div>
+  </div>
+</div>
+<style>
+  .vmodal{position:fixed;inset:0;z-index:50;display:none;align-items:center;justify-content:center;padding:24px}
+  .vmodal.open{display:flex}
+  .vbackdrop{position:absolute;inset:0;background:rgba(8,16,30,.82);backdrop-filter:blur(2px)}
+  .vframe{position:relative;width:min(960px,100%);z-index:1}
+  .vratio{position:relative;padding-top:56.25%;background:#000;border-radius:14px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.5)}
+  .vratio iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+  .vclose{position:absolute;top:-44px;right:0;background:none;border:none;color:#fff;font-size:34px;line-height:1;cursor:pointer;font-family:var(--body)}
+  .vclose:hover{color:var(--gold-lt)}
+</style>
+<script>
+  (function(){
+    var modal=document.getElementById('vmodal'), ifr=document.getElementById('vIframe'), btn=document.getElementById('mloPlay');
+    function open(src){ ifr.src=src; modal.classList.add('open'); modal.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; }
+    function close(){ modal.classList.remove('open'); modal.setAttribute('aria-hidden','true'); ifr.src=''; document.body.style.overflow=''; }
+    if(btn){ btn.addEventListener('click', function(e){ var src=btn.getAttribute('data-embed'); if(src){ e.preventDefault(); open(src); } }); }
+    modal.addEventListener('click', function(e){ if(e.target.hasAttribute('data-close')) close(); });
+    document.addEventListener('keydown', function(e){ if(e.key==='Escape') close(); });
+  })();
+</script>
 
 </body>
 </html>
