@@ -200,6 +200,19 @@
   .lev .ltag{font-family:var(--disp);font-weight:800;font-size:12.5px;letter-spacing:.11em;color:var(--muted);text-transform:uppercase;margin-top:11px;line-height:1.3;min-height:50px}
 
   /* ---- footer ---- */
+  /* bottom CTA */
+  .cta{position:relative;text-align:center;padding:58px 20px 62px;background:var(--sky);overflow:hidden}
+  .cta .range{top:auto;bottom:0;opacity:.4}
+  .cta-inner{position:relative;z-index:2;max-width:760px;margin:0 auto}
+  .cta .eyebrow{font-family:var(--disp);font-weight:700;text-transform:uppercase;letter-spacing:.22em;font-size:13px;color:var(--gold-dk);margin-bottom:10px}
+  .cta h2{font-family:var(--disp);font-weight:900;text-transform:uppercase;font-size:clamp(26px,3.2vw,40px);color:var(--navy);line-height:1.04}
+  .cta h2 .gold{color:var(--gold)}
+  .cta p{color:var(--muted);font-size:17px;margin:14px auto 26px;max-width:620px}
+  .cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  .cta-primary{background:var(--navy);color:#fff;font-family:var(--disp);font-weight:800;font-size:16px;padding:15px 32px;border-radius:100px;text-decoration:none;transition:background .15s,transform .15s;box-shadow:0 10px 24px rgba(20,40,70,.18)}
+  .cta-primary:hover{background:var(--navy-3);transform:translateY(-2px)}
+  .cta-secondary{background:#fff;color:var(--navy);border:2px solid var(--navy);font-family:var(--disp);font-weight:800;font-size:16px;padding:13px 30px;border-radius:100px;text-decoration:none;transition:background .15s,transform .15s}
+  .cta-secondary:hover{background:var(--pill);transform:translateY(-2px)}
   .foot-final{background:var(--navy-4);color:#9fb0ca;text-align:center;font-size:12.5px;padding:22px;letter-spacing:.02em}
   .foot-final b{color:#fff}
 
@@ -520,6 +533,20 @@
     <div class="inner wrap">
       <div class="btitle">Be discovered wherever <span class="gold">Central Canada's</span> mining industry is looking.<br><span style="font-size:15px;font-weight:600;color:#cdd9ee;font-family:var(--body)">From trade shows to digital discovery to industry news, we connect the right need with the right supplier.</span></div>
       <div class="btag">Ontario + Quebec<br><b>A Richer Mining Tomorrow.</b></div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= BOTTOM CTA ======================= -->
+<section class="cta">
+  <svg class="range" viewBox="0 0 1440 200" preserveAspectRatio="none" aria-hidden="true"><path d="M0,200 L0,120 L260,44 L500,130 L720,34 L940,140 L1160,54 L1380,130 L1440,90 L1440,200Z" fill="#cddbf0"/></svg>
+  <div class="cta-inner">
+    <div class="eyebrow">Get Discovered</div>
+    <h2>Put your business in front of <span class="gold">Central Canada's</span> mining industry.</h2>
+    <p>One profile powers expo visibility, online discovery, and editorial reach — across CME / CEN-CAN Expos, Mining Life Online, and Mining Life &amp; Exploration News.</p>
+    <div class="cta-btns">
+      <a class="cta-primary" href="https://virtex.cencanexpo.ca/" target="_blank" rel="noopener">Get Listed</a>
+      <a class="cta-secondary" href="https://issuu.com/canadiantradex/docs/ml_summer_2026-2_web" target="_blank" rel="noopener">See the Latest Issue</a>
     </div>
   </div>
 </section>
