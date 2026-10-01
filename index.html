@@ -295,7 +295,7 @@
     </article>
     <!-- MLO -->
     <article class="chan">
-      <div class="photo"><img src="images/mlo.jpg" alt="Mining Life Online on a laptop"><a class="ytbtn" id="mloPlay" href="https://youtu.be/MAYiS1-85Ak" target="_blank" rel="noopener" data-embed="https://www.youtube.com/embed/MAYiS1-85Ak?autoplay=1&rel=0" aria-label="Watch the Mining Life Online video"></a></div>
+      <div class="photo"><img src="images/mlo.jpg" alt="Mining Life Online on a laptop"><a class="ytbtn" id="mloPlay" href="https://youtu.be/MAYiS1-85Ak" target="_blank" rel="noopener" data-embed="https://www.youtube.com/embed/MAYiS1-85Ak?autoplay=1&rel=0" data-embed-m="https://www.youtube.com/embed/UMQOysJY1YY?autoplay=1&rel=0" aria-label="Watch the Mining Life Online video"></a></div>
       <div class="badge"><svg viewBox="0 0 24 24"><rect class="ic" x="3" y="5" width="18" height="12" rx="1.5"/><path class="ic" d="M2 20h20"/></svg></div>
       <h3>Mining Life Online</h3>
       <span class="pill">Always-On Digital Discovery</span>
@@ -579,6 +579,8 @@
   .vbackdrop{position:absolute;inset:0;background:rgba(8,16,30,.82);backdrop-filter:blur(2px)}
   .vframe{position:relative;width:min(960px,100%);z-index:1}
   .vratio{position:relative;padding-top:56.25%;background:#000;border-radius:14px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.5)}
+  .vmodal.portrait .vframe{width:min(420px,100%)}
+  .vmodal.portrait .vratio{padding-top:177.78%}
   .vratio iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
   .vclose{position:absolute;top:-44px;right:0;background:none;border:none;color:#fff;font-size:34px;line-height:1;cursor:pointer;font-family:var(--body)}
   .vclose:hover{color:var(--gold-lt)}
@@ -586,9 +588,13 @@
 <script>
   (function(){
     var modal=document.getElementById('vmodal'), ifr=document.getElementById('vIframe'), btn=document.getElementById('mloPlay');
-    function open(src){ ifr.src=src; modal.classList.add('open'); modal.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; }
+    function open(src, portrait){ ifr.src=src; modal.classList.toggle('portrait', !!portrait); modal.classList.add('open'); modal.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; }
     function close(){ modal.classList.remove('open'); modal.setAttribute('aria-hidden','true'); ifr.src=''; document.body.style.overflow=''; }
-    if(btn){ btn.addEventListener('click', function(e){ var src=btn.getAttribute('data-embed'); if(src){ e.preventDefault(); open(src); } }); }
+    if(btn){ btn.addEventListener('click', function(e){
+      var isMobile=window.matchMedia('(max-width:780px)').matches;
+      var src=isMobile ? (btn.getAttribute('data-embed-m')||btn.getAttribute('data-embed')) : btn.getAttribute('data-embed');
+      if(src){ e.preventDefault(); open(src, isMobile); }
+    }); }
     modal.addEventListener('click', function(e){ if(e.target.hasAttribute('data-close')) close(); });
     document.addEventListener('keydown', function(e){ if(e.key==='Escape') close(); });
   })();
