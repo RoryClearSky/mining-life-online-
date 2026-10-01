@@ -182,7 +182,13 @@
   .lev .badge svg{width:29px;height:29px}
   .lev h4{font-size:15px;font-weight:800;color:var(--navy);text-transform:uppercase;min-height:36px;display:flex;align-items:center;justify-content:center}
   .lev .desc{font-size:13.5px;color:var(--muted);margin:8px 0 12px;flex:1}
-  .lev .shot{width:100%;height:92px;object-fit:cover;border-radius:9px;border:1px solid var(--line);margin:0 0 14px}
+  .lev .shot{width:100%;height:104px;object-fit:cover;border-radius:9px;border:1px solid var(--line);margin:0 0 14px}
+  /* level 4 opportunities overlay */
+  .lev .shot.l4{background:linear-gradient(180deg,rgba(10,20,36,.52),rgba(10,20,36,.74)),url('images/d_news.jpg');background-size:cover;background-position:center;display:flex;align-items:center;padding:8px 10px;overflow:hidden}
+  .l4ov{width:100%}
+  .l4h{font-family:var(--disp);font-weight:800;font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-lt);margin:0 0 5px}
+  .l4r{display:flex;align-items:center;gap:7px;color:#fff;font-size:12.5px;font-weight:600;line-height:1.15;margin:3px 0}
+  .l4r svg{width:14px;height:14px;flex:none;stroke:var(--gold-lt);stroke-width:1.9;fill:none}
   .lev .lnum{font-family:var(--disp);font-weight:900;font-size:15px;letter-spacing:.17em;text-transform:uppercase;color:#fff;background:linear-gradient(100deg,var(--navy-3),var(--navy));border-radius:5px;padding:10px 8px;width:100%;white-space:nowrap}
   .lev .ltag{font-family:var(--disp);font-weight:800;font-size:12.5px;letter-spacing:.11em;color:var(--muted);text-transform:uppercase;margin-top:11px;line-height:1.3}
 
@@ -485,7 +491,13 @@
           <div class="badge"><svg viewBox="0 0 24 24"><path class="ic" d="M4 20V11M10 20V6M16 20v-9M20 20H3"/></svg></div>
           <h4>Intelligence / Premium</h4>
           <p class="desc">Project matching, buyer-intent analytics, opportunity alerts.</p>
-          <img class="shot" src="images/d_news.jpg" alt="Opportunities across the mining landscape">
+          <div class="shot l4"><div class="l4ov">
+            <div class="l4h">Opportunities</div>
+            <div class="l4r"><svg viewBox="0 0 24 24"><path d="M14 3l1.5 3.5L19 8l-3 2 .8 4-3.8-2-3.8 2L10 10 7 8l3.5-1.5z"/></svg>New Projects</div>
+            <div class="l4r"><svg viewBox="0 0 24 24"><path d="M4 20V11M10 20V6M16 20v-9M20 20H3"/></svg>Buyer Insights</div>
+            <div class="l4r"><svg viewBox="0 0 24 24"><path d="M12 4a5 5 0 0 1 5 5c0 4 2 5 2 5H5s2-1 2-5a5 5 0 0 1 5-5zM10 20h4"/></svg>Opportunity Alerts</div>
+            <div class="l4r"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="3"/></svg>Strategic Matches</div>
+          </div></div>
           <div class="lnum">Level 4</div><div class="ltag">Turn Opportunities Into Growth</div>
         </div>
       </div>
