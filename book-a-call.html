@@ -79,7 +79,11 @@
   .done h2{font-family:var(--disp);font-weight:900;text-transform:uppercase;color:var(--navy);margin:0 0 6px;font-size:24px}
   .done p{color:var(--muted);font-size:16px;margin:0 auto;max-width:460px}
   .done .det{font-family:var(--disp);font-weight:800;color:var(--navy);font-size:18px;margin:12px 0}
-  .again{margin-top:16px;background:none;border:1px solid var(--line);border-radius:100px;padding:9px 18px;font-family:var(--disp);font-weight:700;font-size:14px;color:var(--muted);cursor:pointer}
+  .fromline{max-width:500px;margin:0 auto;font-size:15px;color:var(--ink);background:var(--sky);border:1px solid var(--line);border-radius:12px;padding:14px 18px;line-height:1.5}
+  .fromline a{color:var(--navy);font-weight:700}
+  .helpline{margin-top:12px;font-size:15px;color:var(--muted)}
+  .helpline a{color:var(--navy);font-weight:800;text-decoration:none}
+  .again{margin-top:18px;background:none;border:1px solid var(--line);border-radius:100px;padding:9px 18px;font-family:var(--disp);font-weight:700;font-size:14px;color:var(--muted);cursor:pointer}
 </style>
 </head>
 <body>
@@ -128,9 +132,11 @@
     <div class="done" id="done">
       <div class="chk"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="#0a1424" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4.5 4.5L19 7"/></svg></div>
       <h2>You're booked!</h2>
-      <p>We've reserved your 15-minute Founders call. We'll send your <b>virtual meeting link</b> to your email and phone shortly.</p>
+      <p>Your 15-minute Founders call is reserved.</p>
       <div class="det" id="doneDet"></div>
-      <div id="doneContact" style="color:var(--muted);font-size:15px;margin-bottom:4px"></div>
+      <div id="doneContact" style="color:var(--muted);font-size:15px;margin-bottom:16px"></div>
+      <div class="fromline"><b>Rory Dredhart</b> (<a href="mailto:r.dredhart@canadiantradex.com">r.dredhart@canadiantradex.com</a>) will be sending you a <b>virtual meeting link</b>. If you don't see the email, please check your <b>spam</b> folder.</div>
+      <div class="helpline">Any issues? Call Rory at <a href="tel:+17052642251">705-264-2251</a>.</div>
       <button class="again" id="again">Book a different time</button>
     </div>
   </div>
