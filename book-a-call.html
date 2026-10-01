@@ -60,6 +60,19 @@
   .book:enabled:hover{background:var(--navy-3);transform:translateY(-2px)}
   .book:disabled{opacity:.45;cursor:not-allowed}
 
+  /* details form */
+  .details{display:none}
+  .details .fcard{max-width:520px;margin:0 auto}
+  .selbar{background:var(--pill);color:var(--navy);border-radius:10px;padding:12px 14px;font-family:var(--disp);font-weight:800;font-size:15px;margin-bottom:18px;text-align:center}
+  .field{margin-bottom:14px}
+  .field label{display:block;font-family:var(--disp);font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:.03em;color:var(--muted);margin-bottom:6px}
+  .field .req{color:#cf3d3d}
+  .field input{width:100%;border:1px solid var(--line);border-radius:9px;padding:12px 13px;font-size:15.5px;font-family:var(--body);outline:none;background:#fff}
+  .field input:focus{border-color:var(--navy)}
+  .ferr{color:#cf3d3d;font-size:13.5px;font-weight:600;min-height:18px;margin:2px 0 8px}
+  .fbtns{display:flex;gap:10px;align-items:center}
+  .fbtns .book{margin-left:auto}
+  .fnote{font-size:13px;color:var(--muted);text-align:center;margin:16px 0 0}
   .done{display:none;text-align:center;background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:34px 24px;margin-top:4px}
   .done.show{display:block}
   .done .chk{width:60px;height:60px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;margin:0 auto 14px}
@@ -94,15 +107,30 @@
 
       <div class="bar">
         <div class="summary" id="summary">Choose a day and time to continue.</div>
-        <button class="book" id="book" disabled>Confirm booking</button>
+        <button class="book" id="book" disabled>Continue &rarr;</button>
+      </div>
+    </div>
+
+    <div class="details" id="details">
+      <div class="card fcard">
+        <div class="ch">Your details</div>
+        <div class="selbar" id="selbar"></div>
+        <div class="field"><label>Full name <span class="req">*</span></label><input id="f_name" type="text" placeholder="Jane Smith"></div>
+        <div class="field"><label>Company</label><input id="f_company" type="text" placeholder="Northern Flow Systems"></div>
+        <div class="field"><label>Email <span class="req">*</span></label><input id="f_email" type="email" placeholder="you@company.com"></div>
+        <div class="field"><label>Phone <span class="req">*</span></label><input id="f_phone" type="tel" placeholder="(705) 555-0123"></div>
+        <div class="ferr" id="ferr"></div>
+        <div class="fbtns"><button class="again" id="backBtn">&larr; Back</button><button class="book" id="confirm2">Confirm booking</button></div>
+        <p class="fnote">We'll send your virtual meeting link to your email and phone.</p>
       </div>
     </div>
 
     <div class="done" id="done">
       <div class="chk"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="#0a1424" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4.5 4.5L19 7"/></svg></div>
       <h2>You're booked!</h2>
-      <p>We've reserved your 15-minute Founders call. A calendar invite is on its way.</p>
+      <p>We've reserved your 15-minute Founders call. We'll send your <b>virtual meeting link</b> to your email and phone shortly.</p>
       <div class="det" id="doneDet"></div>
+      <div id="doneContact" style="color:var(--muted);font-size:15px;margin-bottom:4px"></div>
       <button class="again" id="again">Book a different time</button>
     </div>
   </div>
@@ -160,12 +188,37 @@
     } else { summary.textContent='Choose a day and time to continue.'; bookBtn.disabled=true; }
   }
 
-  bookBtn.onclick=function(){ var d=days[sel.day];
+  function slotText(){ var d=days[sel.day]; return WD[d.getDay()]+', '+MONTHS[d.getMonth()]+' '+d.getDate()+' · '+sel.slot+' ET (15 min)'; }
+
+  // Continue -> details form
+  bookBtn.onclick=function(){
     document.getElementById('booker').style.display='none';
-    document.getElementById('doneDet').textContent=WD[d.getDay()]+', '+MONTHS[d.getMonth()]+' '+d.getDate()+' · '+sel.slot+' ET (15 min)';
+    document.getElementById('selbar').textContent=slotText();
+    document.getElementById('details').style.display='block';
+    window.scrollTo({top:0,behavior:'smooth'});
+  };
+  document.getElementById('backBtn').onclick=function(){
+    document.getElementById('details').style.display='none';
+    document.getElementById('booker').style.display='';
+  };
+
+  // Confirm -> validate -> done
+  document.getElementById('confirm2').onclick=function(){
+    var name=document.getElementById('f_name').value.trim();
+    var email=document.getElementById('f_email').value.trim();
+    var phone=document.getElementById('f_phone').value.replace(/[^0-9]/g,'');
+    var err=document.getElementById('ferr');
+    if(!name){ err.textContent='Please enter your name.'; return; }
+    if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){ err.textContent='Please enter a valid email address.'; return; }
+    if(phone.length<10){ err.textContent='Please enter a valid phone number.'; return; }
+    err.textContent='';
+    document.getElementById('details').style.display='none';
+    document.getElementById('doneDet').textContent=slotText();
+    document.getElementById('doneContact').textContent='Link going to '+document.getElementById('f_email').value.trim()+' · '+document.getElementById('f_phone').value.trim();
     document.getElementById('done').classList.add('show');
     window.scrollTo({top:0,behavior:'smooth'});
   };
+
   document.getElementById('again').onclick=function(){
     document.getElementById('done').classList.remove('show');
     document.getElementById('booker').style.display='';
