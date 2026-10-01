@@ -295,7 +295,8 @@
     </article>
     <!-- MLO -->
     <article class="chan">
-      <div class="photo"><img src="images/mlo.jpg" alt="Mining Life Online on a laptop"><a class="ytbtn" id="mloPlay" href="https://youtu.be/MAYiS1-85Ak" target="_blank" rel="noopener" data-embed="https://www.youtube.com/embed/MAYiS1-85Ak?autoplay=1&rel=0" data-embed-m="https://www.youtube.com/embed/UMQOysJY1YY?autoplay=1&rel=0" aria-label="Watch the Mining Life Online video"></a></div>
+      <div class="photo"><img src="images/mlo.jpg" alt="Mining Life Online on a laptop"><!-- mobile cut (vertical Short) blocked on YouTube; to re-enable, add back: data-embed-m="https://www.youtube.com/embed/UMQOysJY1YY?autoplay=1&rel=0" -->
+<a class="ytbtn" id="mloPlay" href="https://youtu.be/MAYiS1-85Ak" target="_blank" rel="noopener" data-embed="https://www.youtube.com/embed/MAYiS1-85Ak?autoplay=1&rel=0" aria-label="Watch the Mining Life Online video"></a></div>
       <div class="badge"><svg viewBox="0 0 24 24"><rect class="ic" x="3" y="5" width="18" height="12" rx="1.5"/><path class="ic" d="M2 20h20"/></svg></div>
       <h3>Mining Life Online</h3>
       <span class="pill">Always-On Digital Discovery</span>
@@ -591,9 +592,10 @@
     function open(src, portrait){ ifr.src=src; modal.classList.toggle('portrait', !!portrait); modal.classList.add('open'); modal.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; }
     function close(){ modal.classList.remove('open'); modal.setAttribute('aria-hidden','true'); ifr.src=''; document.body.style.overflow=''; }
     if(btn){ btn.addEventListener('click', function(e){
-      var isMobile=window.matchMedia('(max-width:780px)').matches;
-      var src=isMobile ? (btn.getAttribute('data-embed-m')||btn.getAttribute('data-embed')) : btn.getAttribute('data-embed');
-      if(src){ e.preventDefault(); open(src, isMobile); }
+      var mEmbed=btn.getAttribute('data-embed-m');
+      var useMobile=window.matchMedia('(max-width:780px)').matches && mEmbed;
+      var src=useMobile ? mEmbed : btn.getAttribute('data-embed');
+      if(src){ e.preventDefault(); open(src, useMobile); }
     }); }
     modal.addEventListener('click', function(e){ if(e.target.hasAttribute('data-close')) close(); });
     document.addEventListener('keydown', function(e){ if(e.key==='Escape') close(); });
