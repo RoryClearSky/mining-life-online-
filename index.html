@@ -66,6 +66,10 @@
 
   /* ---- pills ---- */
   .pill{display:inline-block;background:var(--pill);color:var(--pill-ink);font-family:var(--disp);font-weight:700;font-size:14px;padding:7px 18px;border-radius:100px;letter-spacing:.01em}
+  .evlinks{display:flex;gap:9px;justify-content:center;flex-wrap:wrap}
+  .evbtn{display:inline-flex;align-items:center;gap:7px;background:var(--pill);color:var(--pill-ink);font-family:var(--disp);font-weight:700;font-size:14px;padding:8px 18px;border-radius:100px;text-decoration:none;letter-spacing:.01em;transition:background .15s,transform .15s}
+  .evbtn:hover{background:#cdd9ee;transform:translateY(-1px)}
+  .evbtn .mk{width:7px;height:7px;border-radius:50%;background:var(--gold)}
   .pill.gold{background:linear-gradient(180deg,#f2e6c6,#e7d29a);color:#5a4410}
 
   /* ============ HERO (image 1) ============ */
@@ -261,7 +265,10 @@
       <div class="photo"><img src="images/cme.jpg" alt="CME / CEN-CAN expo floor"></div>
       <div class="badge"><svg viewBox="0 0 24 24"><circle class="ic" cx="9" cy="8" r="3"/><path class="ic" d="M3.5 19c0-3 2.5-5 5.5-5s5.5 2 5.5 5"/><circle class="ic" cx="16.5" cy="9" r="2.3"/><path class="ic" d="M15 14.2c2.6.2 5 2.1 5 4.8"/></svg></div>
       <h3>CME / CEN-CAN Expos</h3>
-      <span class="pill">Physical Discovery</span>
+      <div class="evlinks">
+        <a class="evbtn" href="https://virtex.canadianminingexpo.com/" target="_blank" rel="noopener"><span class="mk"></span>CME</a>
+        <a class="evbtn" href="https://virtex.cencanexpo.ca/" target="_blank" rel="noopener"><span class="mk"></span>CEN-CAN</a>
+      </div>
       <p class="desc">Meet face-to-face. Build relationships. Explore new opportunities.</p>
     </article>
     <!-- MLO -->
