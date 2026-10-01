@@ -1,0 +1,503 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mining Discovery Network</title>
+<meta name="description" content="Central Canada's Mining Discovery Network — one connected platform linking CME / CEN-CAN Expos, Mining Life Online, and Mining Life & Exploration News.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#1b2f52; --navy-2:#16294a; --navy-3:#0f1d33; --navy-4:#0a1424;
+    --gold:#c69a3f; --gold-lt:#e3bd60; --gold-dk:#9a7526;
+    --pill:#dbe4f3; --pill-ink:#1b2f52;
+    --ink:#22344f; --muted:#5d6f88; --muted-2:#7e8ba0;
+    --bg:#ffffff; --sky:#eef4fc; --sky-2:#e3ecf8; --line:#e4eaf3;
+    --card:#ffffff; --shadow:0 12px 34px rgba(20,40,70,.10);
+    --shadow-sm:0 6px 18px rgba(20,40,70,.09);
+    --disp:'Archivo',system-ui,sans-serif;
+    --body:'Inter',system-ui,sans-serif;
+    --wrap:1440px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  h1,h2,h3,h4{font-family:var(--disp);margin:0;line-height:1.02;text-wrap:balance;letter-spacing:-.01em}
+  p{margin:0}
+  .wrap{max-width:var(--wrap);margin:0 auto;padding:0 20px}
+  .gold{background:linear-gradient(180deg,var(--gold-lt),var(--gold-dk));-webkit-background-clip:text;background-clip:text;color:transparent}
+
+  /* ---- decorative micro captions ---- */
+  .micro{font-family:var(--disp);font-weight:700;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--navy);line-height:1.7}
+  .micro.dim{color:var(--muted-2)}
+  .edge{border-left:2px solid var(--gold);padding-left:12px}
+
+  /* ---- section frame ---- */
+  section{position:relative;overflow:hidden}
+  .sky-bg{background:linear-gradient(180deg,var(--sky) 0%,var(--sky-2) 30%,#ffffff 78%)}
+  .range{position:absolute;left:0;right:0;width:100%;display:block}
+  .head{position:relative;z-index:2;text-align:center;padding:46px 0 8px}
+  .head .kicker{font-family:var(--disp);font-weight:700;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-dk);margin-bottom:10px}
+  .head h1{font-weight:900;font-size:clamp(26px,3.6vw,46px);color:var(--navy);text-transform:uppercase;max-width:820px;margin:0 auto}
+  .head h2{font-weight:900;font-size:clamp(30px,4.6vw,56px);color:var(--navy);text-transform:uppercase}
+  .head .sub{font-family:var(--disp);font-weight:700;font-size:clamp(16px,2vw,23px);color:var(--navy-2);margin-top:12px}
+  .head .lead{font-size:clamp(15px,1.4vw,18px);color:var(--muted);margin:8px auto 0;max-width:720px}
+
+  /* corner rails on hero */
+  .rails{position:relative;z-index:3}
+  .rail{position:absolute;top:34px}
+  .rail.l{left:20px} .rail.r{right:20px;text-align:right}
+  .rail.r .edge{border-left:none;border-right:2px solid var(--gold);padding:0 12px 0 0}
+
+  /* region emblem */
+  .region{display:flex;align-items:center;gap:12px;justify-content:flex-end}
+  .region .lbl{font-family:var(--disp);font-weight:700;font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:var(--navy);line-height:1.5}
+  .region .lbl b{color:var(--gold-dk);font-weight:800}
+  .map{width:118px;height:auto;flex:none;filter:drop-shadow(0 4px 8px rgba(20,40,70,.18))}
+
+  /* ---- badge icon ---- */
+  .badge{width:76px;height:76px;border-radius:50%;background:radial-gradient(120% 120% at 30% 20%,#2a4670,#132646 70%);display:grid;place-items:center;box-shadow:0 0 0 3px var(--card),0 0 0 6px var(--gold),0 10px 20px rgba(10,20,40,.34);position:relative;z-index:3}
+  .badge svg{width:36px;height:36px}
+  .badge.sm{width:58px;height:58px}.badge.sm svg{width:27px;height:27px}
+  .ic{fill:none;stroke:#fff;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+  .icf{fill:#fff}
+
+  /* ---- pills ---- */
+  .pill{display:inline-block;background:var(--pill);color:var(--pill-ink);font-family:var(--disp);font-weight:700;font-size:14px;padding:7px 18px;border-radius:100px;letter-spacing:.01em}
+  .pill.gold{background:linear-gradient(180deg,#f2e6c6,#e7d29a);color:#5a4410}
+
+  /* ============ HERO (image 1) ============ */
+  .channels{position:relative;z-index:2;display:grid;grid-template-columns:repeat(3,1fr);gap:26px;padding:64px 0 72px}
+  .chan{background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);padding:0 24px 28px;text-align:center;transition:transform .18s,box-shadow .18s}
+  .chan:hover{transform:translateY(-4px);box-shadow:0 20px 44px rgba(20,40,70,.16)}
+  .photo{height:158px;margin:0 -24px;border-radius:18px 18px 0 0;position:relative;overflow:hidden;background:#0f1f38}
+  .photo img{width:100%;height:100%;object-fit:cover;display:block}
+  .chan .badge{margin:-40px auto 0}
+  .photo .pl{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;color:#fff}
+  .photo .pw{font-family:var(--disp);font-weight:900;font-size:22px;letter-spacing:.02em}
+  .photo .pw .dot{color:var(--gold-lt)}
+  .photo .ps{font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:#cfe0f5;font-weight:600}
+  .photo .mtn{position:absolute;left:0;right:0;bottom:0;opacity:.5}
+  .chan h3{font-size:21px;font-weight:800;color:var(--navy);text-transform:uppercase;margin:18px 0 12px;letter-spacing:0}
+  .chan .desc{color:var(--muted);font-size:15.5px;margin-top:14px}
+
+  /* ============ band (footer strips) ============ */
+  .band{position:relative;background:linear-gradient(120deg,var(--navy-3),var(--navy-2) 55%,var(--navy));color:#fff;overflow:hidden}
+  .band .range{bottom:0;opacity:.22}
+  .band .inner{position:relative;z-index:2;display:flex;align-items:center;gap:30px;flex-wrap:wrap;justify-content:space-between;padding:30px 0}
+  .band .btitle{font-family:var(--disp);font-weight:800;font-size:clamp(19px,2.1vw,26px);line-height:1.15;max-width:430px}
+  .band .btitle .gold{font-weight:900}
+  .iconrow{display:flex;gap:26px;flex-wrap:wrap;justify-content:center}
+  .ir{display:flex;flex-direction:column;align-items:center;gap:9px;min-width:78px}
+  .ir .ring{width:56px;height:56px;border-radius:50%;border:2px solid var(--gold);display:grid;place-items:center}
+  .ir .ring svg{width:26px;height:26px}
+  .ir .ic{stroke:var(--gold-lt)} .ir .icf{fill:var(--gold-lt)}
+  .ir span{font-family:var(--disp);font-weight:700;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:#e7eefb}
+  .btag{font-family:var(--disp);font-weight:800;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#cdd9ee;text-align:right;line-height:1.6;border-left:2px solid var(--gold);padding-left:16px}
+  .btag b{color:#fff}
+
+  /* ============ ECOSYSTEM (image 2) ============ */
+  .eco{position:relative;z-index:2;display:grid;grid-template-columns:1fr 1.15fr 1fr;grid-template-areas:"cme engine mlo" "news engine news2";gap:26px;align-items:center;padding:40px 0 30px}
+  .eco .e-cme{grid-area:cme}.eco .e-mlo{grid-area:mlo}
+  .eco .e-engine{grid-area:engine}
+  .eco .e-news{grid-area:news;grid-column:1 / span 1}
+  .ecard{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow-sm);padding:26px 24px;position:relative;text-align:center}
+  .ecard .badge{position:absolute;top:-30px;left:50%;transform:translateX(-50%);margin:0}
+  .ecard h3{font-size:19px;font-weight:800;color:var(--navy);text-transform:uppercase;margin:6px 0 12px}
+  .ecard .desc{color:var(--muted);font-size:15px;margin-top:12px}
+  .ephoto{margin:-26px -24px 18px;height:132px;overflow:hidden;border-radius:16px 16px 0 0;background:#0f1f38}
+  .ephoto img{width:100%;height:100%;object-fit:cover;display:block}
+  .engine{background:radial-gradient(130% 130% at 50% 10%,#294a79,#0e1d34 72%);border-radius:22px;color:#fff;padding:34px 30px;text-align:center;box-shadow:0 0 0 4px rgba(198,154,63,.5),0 24px 50px rgba(10,20,40,.4);position:relative}
+  .engine h3{font-family:var(--disp);font-weight:900;font-size:27px;color:#fff;text-transform:none;letter-spacing:-.01em}
+  .engine .erule{height:2px;width:60px;background:var(--gold);margin:14px auto 18px;border-radius:2px}
+  .engine ul{list-style:none;margin:0 auto;padding:0;display:grid;gap:13px;text-align:left;max-width:290px}
+  .engine li{display:flex;align-items:center;gap:13px;font-family:var(--disp);font-weight:700;font-size:16px;color:#eaf1fc}
+  .engine li svg{width:22px;height:22px;flex:none}
+  .engine li .ic{stroke:var(--gold-lt)} .engine li .icf{fill:var(--gold-lt)}
+  .engine .foot{margin-top:20px;font-family:var(--disp);font-weight:700;font-size:11px;letter-spacing:.16em;color:#9fb4d4;text-transform:uppercase;line-height:1.7}
+  .eco-note{position:relative;z-index:2;text-align:center;font-family:var(--disp);font-weight:700;font-size:clamp(15px,1.7vw,19px);color:var(--navy-2);background:var(--pill);border-radius:14px;padding:18px 26px;margin:6px auto 60px;max-width:960px}
+  .eco-note b{color:var(--gold-dk)}
+
+  /* ============ HOW IT WORKS (image 4) ============ */
+  .query{position:relative;z-index:2;display:flex;align-items:center;gap:0;flex-wrap:wrap;background:var(--card);border:1px solid var(--line);border-radius:100px;box-shadow:var(--shadow-sm);margin:30px auto 40px;overflow:hidden}
+  .query .qlab{background:linear-gradient(100deg,var(--navy-3),var(--navy));color:#fff;font-family:var(--disp);font-weight:800;font-size:13px;letter-spacing:.14em;text-transform:uppercase;padding:16px 24px;white-space:nowrap}
+  .query .qtext{padding:12px 24px;font-size:clamp(15px,1.7vw,19px);font-style:italic;color:var(--navy-2);font-weight:500}
+  .steps{position:relative;z-index:2;display:grid;grid-template-columns:repeat(5,1fr);gap:16px;padding:18px 0 20px;align-items:stretch}
+  .step{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow-sm);padding:40px 15px 16px;display:flex;flex-direction:column;position:relative}
+  .step .badge.sm{position:absolute;top:-29px;left:50%;transform:translateX(-50%);width:58px;height:58px;margin:0}
+  .step h4{text-align:center;font-size:15px;font-weight:800;color:var(--navy);text-transform:uppercase;margin-bottom:10px;line-height:1.1}
+  .step .desc{background:var(--pill);color:var(--navy-2);border-radius:10px;padding:10px 12px;text-align:center;font-size:13px;font-weight:500;line-height:1.42}
+  .step .quote{margin-top:12px;background:var(--pill);border-radius:10px;padding:11px 13px;font-size:12.5px;font-style:italic;color:var(--navy-2);text-align:center;line-height:1.45}
+  .stepimg{margin-top:12px;border-radius:10px;overflow:hidden;height:120px;border:1px solid var(--line)}
+  .stepimg img{width:100%;height:100%;object-fit:cover;display:block}
+  /* box 3 - supplier rows */
+  .sublist{margin-top:12px;display:grid;gap:9px}
+  .supp{border:1px solid var(--line);border-radius:12px;padding:10px 11px;display:flex;gap:10px;align-items:center;box-shadow:0 2px 7px rgba(20,40,70,.05)}
+  .supp .si{width:30px;height:30px;flex:none;display:grid;place-items:center}
+  .supp .si svg{width:27px;height:27px}.supp .si .ic{stroke:var(--navy);stroke-width:1.8}.supp .si .icf{fill:var(--navy)}
+  .supp .stxt{flex:1;min-width:0}
+  .supp b{display:block;font-size:13px;color:var(--navy);font-weight:800;line-height:1.2}
+  .supp small{font-size:10.5px;color:var(--muted-2);letter-spacing:.01em}
+  .supp .chev{flex:none;color:var(--muted-2);font-size:18px;line-height:1}
+  /* box 4 - discovery rows */
+  .disc{margin-top:12px;display:grid;gap:11px}
+  .disc .d{display:flex;gap:12px;align-items:center}
+  .disc .dthumb{width:112px;height:74px;border-radius:8px;overflow:hidden;flex:none;border:1px solid var(--line)}
+  .disc .dthumb img{width:100%;height:100%;object-fit:cover;display:block}
+  .disc .dtxt{flex:1;min-width:0}
+  .disc b{display:block;font-size:14px;color:var(--navy);font-weight:800;text-transform:uppercase;letter-spacing:.02em;line-height:1.15;margin-bottom:3px}
+  .disc small{display:block;font-size:12.5px;color:var(--muted);line-height:1.3}
+  /* box 5 - checklist */
+  .check{margin-top:12px;display:grid;gap:8px}
+  .check div{display:flex;gap:9px;align-items:center;font-size:13px;color:var(--ink);font-weight:600}
+  .check svg{width:18px;height:18px;flex:none}
+  .diff{position:relative;z-index:2;display:grid;grid-template-columns:auto repeat(3,1fr);gap:26px;align-items:center;padding:28px 0 8px}
+  .diff .dh{font-family:var(--disp);font-weight:900;font-size:28px;color:#fff;text-transform:uppercase;line-height:1}
+  .diff .di2{display:flex;gap:14px;align-items:flex-start}
+  .diff .di2 .ring{width:48px;height:48px;border-radius:50%;border:2px solid var(--gold);display:grid;place-items:center;flex:none}
+  .diff .di2 .ring svg{width:22px;height:22px}.diff .di2 .ic{stroke:var(--gold-lt)}.diff .di2 .icf{fill:var(--gold-lt)}
+  .diff .di2 b{display:block;font-family:var(--disp);font-weight:800;font-size:15px;color:#fff;margin-bottom:3px}
+  .diff .di2 small{font-size:13px;color:#cdd9ee;line-height:1.5}
+  .arrow{align-self:center;color:var(--gold);display:grid;place-items:center}
+  .arrow svg{width:22px;height:22px}
+
+  /* ============ WHY IT MATTERS (image 3) ============ */
+  .matters{position:relative;z-index:2;display:grid;grid-template-columns:0.9fr 1.35fr;gap:30px;padding:34px 0 20px}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow-sm);overflow:hidden}
+  .panel .ph{background:linear-gradient(100deg,var(--navy-3),var(--navy));background-size:cover;background-position:center;color:#fff;font-family:var(--disp);font-weight:900;font-size:20px;letter-spacing:.02em;text-transform:uppercase;padding:16px 24px;border-left:6px solid var(--gold);display:flex;align-items:center;gap:10px}
+  .panel .ph.img{min-height:132px;align-items:flex-end;font-size:23px;padding:18px 24px}
+  .benefits{padding:10px 26px 22px}
+  .brow{display:flex;gap:18px;padding:22px 0;border-bottom:1px solid var(--line)}
+  .brow:last-child{border-bottom:none}
+  .brow .badge{margin:0;flex:none}
+  .brow h4{font-size:19px;font-weight:800;color:var(--navy);text-transform:none;margin-bottom:8px}
+  .brow ul{margin:0;padding:0;list-style:none;display:grid;gap:6px}
+  .brow li{position:relative;padding-left:20px;color:var(--ink);font-size:15px}
+  .brow li::before{content:"";position:absolute;left:0;top:8px;width:8px;height:8px;border-radius:50%;background:var(--gold)}
+  .levels{display:grid;grid-template-columns:repeat(4,1fr);gap:38px 16px;padding:46px 22px 24px}
+  .lev{position:relative;border:1px solid var(--line);border-radius:14px;background:#fbfcfe;padding:40px 15px 18px;text-align:center;display:flex;flex-direction:column}
+  .lev .badge{position:absolute;top:-31px;left:50%;transform:translateX(-50%);margin:0;width:61px;height:61px}
+  .lev .badge svg{width:29px;height:29px}
+  .lev h4{font-size:15px;font-weight:800;color:var(--navy);text-transform:uppercase;min-height:36px;display:flex;align-items:center;justify-content:center}
+  .lev .desc{font-size:13.5px;color:var(--muted);margin:8px 0 16px;flex:1}
+  .lev .lnum{font-family:var(--disp);font-weight:900;font-size:16px;letter-spacing:.08em;color:#fff;background:linear-gradient(100deg,var(--navy-3),var(--navy));border-radius:8px;padding:8px}
+  .lev .ltag{font-family:var(--disp);font-weight:800;font-size:11px;letter-spacing:.13em;color:var(--gold-dk);text-transform:uppercase;margin-top:9px}
+
+  /* ---- footer ---- */
+  .foot-final{background:var(--navy-4);color:#9fb0ca;text-align:center;font-size:12.5px;padding:22px;letter-spacing:.02em}
+  .foot-final b{color:#fff}
+
+  /* ============ RESPONSIVE ============ */
+  @media(max-width:1240px){
+    .rail{position:static;display:inline-block}
+    .rails{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:18px 20px 0}
+    .rail.l,.rail.r{text-align:left}
+    .rail.r .edge{border-left:2px solid var(--gold);border-right:none;padding:0 0 0 12px}
+    .region{justify-content:flex-start}
+  }
+  @media(max-width:1000px){
+    .rail{position:static;display:inline-block;margin:0}
+    .rails .rail.l,.rails .rail.r{text-align:left}
+    .rails{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:20px 20px 0}
+    .rail.r .edge{border-left:2px solid var(--gold);border-right:none;padding:0 0 0 12px}
+    .region{justify-content:flex-start}
+    .channels{grid-template-columns:1fr;gap:44px;padding:56px 0 60px}
+    .eco{grid-template-columns:1fr;grid-template-areas:"engine" "cme" "mlo" "news";gap:40px}
+    .ecard .badge{top:-29px}
+    .matters{grid-template-columns:1fr}
+    .levels{grid-template-columns:repeat(2,1fr)}
+    .steps{grid-template-columns:repeat(2,1fr)}
+    .diff{grid-template-columns:1fr}
+    .diff .dh{font-size:24px}
+  }
+  @media(max-width:560px){
+    .wrap{padding:0 20px}
+    .levels{grid-template-columns:1fr}
+    .steps{grid-template-columns:1fr}
+    .band .inner{flex-direction:column;align-items:flex-start}
+    .btag{text-align:left}
+    .query{border-radius:16px}
+    .query .qlab{width:100%}
+  }
+</style>
+</head>
+<body>
+
+<!-- ======================= HERO / IMAGE 1 ======================= -->
+<section class="sky-bg">
+  <svg class="range" style="top:120px;opacity:.35" viewBox="0 0 1440 220" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0,220 L0,120 L180,40 L320,130 L470,30 L640,150 L820,60 L1000,140 L1180,50 L1330,130 L1440,80 L1440,220 Z" fill="#c9d8ef"/>
+    <path d="M0,220 L0,160 L220,90 L400,170 L560,100 L760,180 L980,110 L1200,175 L1440,120 L1440,220 Z" fill="#dbe6f6"/>
+  </svg>
+
+  <div class="rails wrap">
+    <div class="rail l"><div class="micro edge">People<br>Resources<br>Opportunities<br>A Stronger<br>Tomorrow</div></div>
+    <div class="rail r">
+      <div class="region">
+        <img class="map" src="images/map.png" alt="Map of Manitoba, Ontario and Quebec">
+      </div>
+      <div class="micro dim edge" style="margin-top:14px">Same<br>Industry.<br>More<br>Opportunities.</div>
+    </div>
+  </div>
+
+  <div class="head wrap">
+    <h1>Central Canada's Mining<br><span class="gold">Discovery Network</span></h1>
+    <p class="sub">One connected platform linking CME / CEN-CAN Expos, Mining Life Online,<br>and Mining Life &amp; Exploration News.</p>
+    <p class="lead">Be discovered wherever Ontario and Quebec's mining industry is looking.</p>
+  </div>
+
+  <div class="channels wrap">
+    <!-- CME -->
+    <article class="chan">
+      <div class="photo"><img src="images/cme.jpg" alt="CME / CEN-CAN expo floor"></div>
+      <div class="badge"><svg viewBox="0 0 24 24"><circle class="ic" cx="9" cy="8" r="3"/><path class="ic" d="M3.5 19c0-3 2.5-5 5.5-5s5.5 2 5.5 5"/><circle class="ic" cx="16.5" cy="9" r="2.3"/><path class="ic" d="M15 14.2c2.6.2 5 2.1 5 4.8"/></svg></div>
+      <h3>CME / CEN-CAN Expos</h3>
+      <span class="pill">Physical Discovery</span>
+      <p class="desc">Meet face-to-face. Build relationships. Explore new opportunities.</p>
+    </article>
+    <!-- MLO -->
+    <article class="chan">
+      <div class="photo"><img src="images/mlo.jpg" alt="Mining Life Online on a laptop"></div>
+      <div class="badge"><svg viewBox="0 0 24 24"><rect class="ic" x="3" y="5" width="18" height="12" rx="1.5"/><path class="ic" d="M2 20h20"/></svg></div>
+      <h3>Mining Life Online</h3>
+      <span class="pill">Always-On Digital Discovery</span>
+      <p class="desc">Search, compare, and connect with suppliers, products, and companies.</p>
+    </article>
+    <!-- News -->
+    <article class="chan">
+      <div class="photo"><img src="images/news.jpg" alt="CEN-CAN expo crowd and mining equipment"></div>
+      <div class="badge"><svg viewBox="0 0 24 24"><path class="ic" d="M5 4h11v16H5z"/><path class="ic" d="M16 8h3v10a2 2 0 0 1-2 2h-1"/><path class="ic" d="M8 8h5M8 11h5M8 14h5"/></svg></div>
+      <h3>Mining Life &amp; Exploration News</h3>
+      <span class="pill">Contextual Discovery</span>
+      <p class="desc">Industry stories connect you to relevant suppliers, technologies, products, and commercial opportunities.</p>
+    </article>
+  </div>
+
+  <!-- connecting band -->
+  <div class="band">
+    <svg class="range" viewBox="0 0 1440 180" preserveAspectRatio="none" aria-hidden="true"><path d="M0,180 L0,110 L220,50 L420,120 L640,40 L860,120 L1080,50 L1300,120 L1440,70 L1440,180Z" fill="#1c3357"/></svg>
+    <div class="inner wrap">
+      <div class="btitle">Connecting buyers, suppliers, products, projects, and opportunities <span class="gold">across Central Canada.</span></div>
+      <div class="iconrow">
+        <div class="ir"><span class="ring"><svg viewBox="0 0 24 24"><circle class="ic" cx="9" cy="8" r="3"/><path class="ic" d="M3.5 19c0-3 2.5-5 5.5-5s5.5 2 5.5 5"/></svg></span><span>Buyers</span></div>
+        <div class="ir"><span class="ring"><svg viewBox="0 0 24 24"><path class="ic" d="M4 15a8 8 0 0 1 16 0"/><path class="ic" d="M2 15h20"/><path class="ic" d="M12 7V4M9 4h6"/></svg></span><span>Suppliers</span></div>
+        <div class="ir"><span class="ring"><svg viewBox="0 0 24 24"><circle class="ic" cx="12" cy="12" r="3.2"/><path class="ic" d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"/></svg></span><span>Products</span></div>
+        <div class="ir"><span class="ring"><svg viewBox="0 0 24 24"><path class="ic" d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></span><span>Projects</span></div>
+        <div class="ir"><span class="ring"><svg viewBox="0 0 24 24"><path class="ic" d="M6 12l3 3 5-6"/><path class="ic" d="M14 15l3 2 4-8"/></svg></span><span>Opportunities</span></div>
+      </div>
+      <div class="btag">Manitoba, Ontario, Quebec<br><b>A Richer Mining Tomorrow.</b></div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= CONNECTED ECOSYSTEM / IMAGE 2 ======================= -->
+<section class="sky-bg" id="ecosystem">
+  <svg class="range" style="top:96px;opacity:.3" viewBox="0 0 1440 200" preserveAspectRatio="none" aria-hidden="true"><path d="M0,200 L0,110 L240,40 L460,130 L680,30 L900,140 L1120,50 L1340,130 L1440,80 L1440,200Z" fill="#cddbf0"/></svg>
+  <div class="head wrap">
+    <div class="kicker">The Connected Ecosystem</div>
+    <h2>Three Channels. <span class="gold">One Engine.</span></h2>
+    <p class="sub">Three channels. One discoverability engine.</p>
+  </div>
+
+  <div class="eco wrap">
+    <article class="ecard e-cme">
+      <div class="ephoto"><img src="images/cme.jpg" alt="CME / CEN-CAN expo floor"></div>
+      <div class="badge sm"><svg viewBox="0 0 24 24"><circle class="ic" cx="9" cy="8" r="3"/><path class="ic" d="M3.5 19c0-3 2.5-5 5.5-5s5.5 2 5.5 5"/><circle class="ic" cx="16.5" cy="9" r="2.3"/><path class="ic" d="M15 14.2c2.6.2 5 2.1 5 4.8"/></svg></div>
+      <h3>CME / CEN-CAN Expos</h3>
+      <span class="pill">Physical Discovery</span>
+      <p class="desc">Find the right exhibitors, booth locations, and who to see first.</p>
+    </article>
+
+    <div class="engine e-engine">
+      <h3>Discoverability Engine</h3>
+      <div class="erule"></div>
+      <ul>
+        <li><svg viewBox="0 0 24 24"><circle class="ic" cx="11" cy="11" r="6.5"/><path class="ic" d="M20 20l-4-4"/></svg> Search by Need</li>
+        <li><svg viewBox="0 0 24 24"><path class="ic" d="M3 5h18l-7 8v6l-4-2v-4z"/></svg> Narrow Your Search</li>
+        <li><svg viewBox="0 0 24 24"><ellipse class="ic" cx="12" cy="5.5" rx="7" ry="2.6"/><path class="ic" d="M5 5.5v6c0 1.4 3.1 2.6 7 2.6s7-1.2 7-2.6v-6M5 11.5v6c0 1.4 3.1 2.6 7 2.6s7-1.2 7-2.6v-6"/></svg> Find the Right Suppliers</li>
+        <li><svg viewBox="0 0 24 24"><path class="ic" d="M12 3a4 4 0 0 0-4 4 3.5 3.5 0 0 0-1 6.5V17a3 3 0 0 0 6 0V4"/><path class="ic" d="M12 3a4 4 0 0 1 4 4 3.5 3.5 0 0 1 1 6.5"/></svg> Get Smart Recommendations</li>
+        <li><svg viewBox="0 0 24 24"><path class="ic" d="M12 3l8 4-8 4-8-4z"/><path class="ic" d="M4 7v10l8 4 8-4V7M12 11v10"/></svg> Explore Products and Services</li>
+        <li><svg viewBox="0 0 24 24"><path class="ic" d="M4 20V11M10 20V6M16 20v-9M20 20H3"/></svg> Discover Opportunities</li>
+      </ul>
+      <div class="foot">People &bull; Data &bull; Opportunities<br>A Stronger Tomorrow</div>
+    </div>
+
+    <article class="ecard e-mlo">
+      <div class="ephoto"><img src="images/mlo.jpg" alt="Mining Life Online on a laptop"></div>
+      <div class="badge sm"><svg viewBox="0 0 24 24"><rect class="ic" x="3" y="5" width="18" height="12" rx="1.5"/><path class="ic" d="M2 20h20"/></svg></div>
+      <h3>Mining Life Online</h3>
+      <span class="pill">Always-On Digital Discovery</span>
+      <p class="desc">Search, compare, refine, and connect with suppliers year-round.</p>
+    </article>
+
+    <article class="ecard e-news">
+      <div class="ephoto"><img src="images/news.jpg" alt="CEN-CAN expo crowd and mining equipment"></div>
+      <div class="badge sm"><svg viewBox="0 0 24 24"><path class="ic" d="M5 4h11v16H5z"/><path class="ic" d="M16 8h3v10a2 2 0 0 1-2 2h-1"/><path class="ic" d="M8 8h5M8 11h5M8 14h5"/></svg></div>
+      <h3>Mining Life &amp; Exploration News</h3>
+      <span class="pill">Contextual Discovery</span>
+      <p class="desc">Stories connect readers to relevant suppliers, technologies, and opportunities.</p>
+    </article>
+  </div>
+
+  <div class="eco-note wrap"><b>One company profile</b> can power expo visibility, supplier discovery, contextual content connections, and future AI recommendations.</div>
+</section>
+
+<!-- ======================= HOW IT WORKS / IMAGE 4 ======================= -->
+<section class="sky-bg" id="how">
+  <svg class="range" style="top:90px;opacity:.28" viewBox="0 0 1440 200" preserveAspectRatio="none" aria-hidden="true"><path d="M0,200 L0,120 L260,44 L500,130 L720,34 L940,140 L1160,54 L1380,130 L1440,90 L1440,200Z" fill="#cddbf0"/></svg>
+  <div class="head wrap">
+    <div class="kicker">How Discoverability Works</div>
+    <h2>How <span class="gold">Discoverability</span> Works</h2>
+    <p class="sub">Turn a need into a supplier connection.</p>
+  </div>
+
+  <div class="query wrap">
+    <div class="qlab">Example Query</div>
+    <div class="qtext">"I need a solution for underground ventilation and remote airflow monitoring."</div>
+  </div>
+
+  <div class="steps wrap">
+    <!-- 1 -->
+    <div class="step">
+      <div class="badge sm"><svg viewBox="0 0 24 24"><path class="ic" d="M4 5h16v10H12l-4 3v-3H4z"/><path class="ic" d="M9.6 8.8a2.4 2.4 0 0 1 4.2 1.5c0 1.6-2 1.6-2 3"/><circle class="icf" cx="11.7" cy="14.4" r="1"/></svg></div>
+      <h4>Need or Problem</h4>
+      <p class="desc">A buyer or mine team has a challenge.</p>
+      <div class="stepimg"><img src="images/tunnel.jpg" alt="Miners inspecting underground ventilation ducts"></div>
+      <div class="quote">"I need a solution for underground ventilation and remote airflow monitoring."</div>
+    </div>
+    <!-- 2 -->
+    <div class="step">
+      <div class="badge sm"><svg viewBox="0 0 24 24"><circle class="ic" cx="12" cy="12" r="3"/><path class="ic" d="M19.4 13a7.5 7.5 0 0 0 0-2l2-1.5-2-3.5-2.4 1a7.5 7.5 0 0 0-1.7-1L14.9 3h-4l-.4 2.5a7.5 7.5 0 0 0-1.7 1l-2.4-1-2 3.5L4.4 11a7.5 7.5 0 0 0 0 2l-2 1.5 2 3.5 2.4-1a7.5 7.5 0 0 0 1.7 1l.4 2.5h4l.4-2.5a7.5 7.5 0 0 0 1.7-1l2.4 1 2-3.5z"/></svg></div>
+      <h4>Discoverability Engine</h4>
+      <p class="desc">Semantic search, taxonomy, and recommendation logic interpret the need.</p>
+      <div class="stepimg" style="height:190px"><img src="images/laptop.jpg" alt="Search, understand, match, connect — semantic search, taxonomy, AI recommendations, supplier matching"></div>
+    </div>
+    <!-- 3 -->
+    <div class="step">
+      <div class="badge sm"><svg viewBox="0 0 24 24"><circle class="ic" cx="9" cy="8" r="3"/><path class="ic" d="M3.5 19c0-3 2.5-5 5.5-5s5.5 2 5.5 5"/><circle class="ic" cx="16.5" cy="9" r="2.3"/><path class="ic" d="M15 14.2c2.6.2 5 2.1 5 4.8"/></svg></div>
+      <h4>Recommended Suppliers</h4>
+      <p class="desc">Relevant companies are surfaced based on relevance, specialization, and products.</p>
+      <div class="sublist">
+        <div class="supp"><span class="si"><svg viewBox="0 0 24 24"><circle class="ic" cx="12" cy="12" r="2.4"/><path class="ic" d="M12 9.6c.7-2.4-.3-4.6-2.6-5.2-1 2.1 0 4.4 2.6 5.2M14.4 12c2.4-.7 4.6.3 5.2 2.6-2.1 1-4.4 0-5.2-2.6M12 14.4c-.7 2.4.3 4.6 2.6 5.2 1-2.1 0-4.4-2.6-5.2M9.6 12c-2.4.7-4.6-.3-5.2-2.6 2.1-1 4.4 0 5.2 2.6"/></svg></span><span class="stxt"><b>Ventilation Solutions Inc.</b><small>Mine Ventilation | Monitoring | Controls</small></span><span class="chev">&rsaquo;</span></div>
+        <div class="supp"><span class="si"><svg viewBox="0 0 24 24"><path class="ic" d="M4 20V11M10 20V6M16 20v-9M20 20H3"/></svg></span><span class="stxt"><b>AirTech Mining</b><small>Airflow Monitoring | Sensors | IoT</small></span><span class="chev">&rsaquo;</span></div>
+        <div class="supp"><span class="si"><svg viewBox="0 0 24 24"><path class="ic" d="M3 9h11a2.2 2.2 0 1 0-2.2-2.2M3 13h15a2.2 2.2 0 1 1-2.2 2.2M3 17h8a2 2 0 1 1-2 2"/></svg></span><span class="stxt"><b>Northern Flow Systems</b><small>Ventilation | Fans | Engineering</small></span><span class="chev">&rsaquo;</span></div>
+      </div>
+    </div>
+    <!-- 4 -->
+    <div class="step">
+      <div class="badge sm"><svg viewBox="0 0 24 24"><rect class="ic" x="3" y="5" width="18" height="12" rx="1.5"/><path class="ic" d="M2 20h20"/></svg></div>
+      <h4>Where They Discover</h4>
+      <p class="desc">Suppliers are found across our connected platform.</p>
+      <div class="disc">
+        <div class="d"><span class="dthumb"><img src="images/d_show.jpg" alt="CME expo floor"></span><div class="dtxt"><b>At the Show</b><small>Booth / route &mdash; meet in person</small></div></div>
+        <div class="d"><span class="dthumb"><img src="images/d_mlo.jpg" alt="Mining Life Online"></span><div class="dtxt"><b>On MLO</b><small>Microsite, products &amp; comparison</small></div></div>
+        <div class="d"><span class="dthumb"><img src="images/d_news.jpg" alt="Industry news"></span><div class="dtxt"><b>In News</b><small>Contextual supplier links &amp; insights</small></div></div>
+      </div>
+    </div>
+    <!-- 5 -->
+    <div class="step">
+      <div class="badge sm"><svg viewBox="0 0 24 24"><path class="ic" d="M11 17l2 2a1 1 0 1 0 3-3"/><path class="ic" d="M14 14l2.5 2.5a1 1 0 1 0 3-3l-3.9-3.9a3 3 0 0 0-4.2 0l-.9.9a1 1 0 1 1-3-3l2.8-2.8a5.8 5.8 0 0 1 7.1-.9l.5.3a2 2 0 0 0 1.4.2L21 4"/><path class="ic" d="M21 3l1 11h-2"/><path class="ic" d="M3 3l8 8"/><path class="ic" d="M11 8l-3.5 3.5a1 1 0 1 0 3 3"/></svg></div>
+      <h4>Connection / Lead</h4>
+      <p class="desc">A meaningful supplier-buyer connection.</p>
+      <div class="stepimg"><img src="images/handshake.jpg" alt="Supplier and buyer shaking hands"></div>
+      <div class="check">
+        <div><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#22406e"/><path d="M7 12l3.5 3.5L17 9" fill="none" stroke="#e3bd60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Right suppliers</div>
+        <div><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#22406e"/><path d="M7 12l3.5 3.5L17 9" fill="none" stroke="#e3bd60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Relevant conversations</div>
+        <div><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#22406e"/><path d="M7 12l3.5 3.5L17 9" fill="none" stroke="#e3bd60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Real opportunities</div>
+        <div><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#22406e"/><path d="M7 12l3.5 3.5L17 9" fill="none" stroke="#e3bd60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>A stronger mining industry</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- why different band -->
+  <div class="band" style="margin-top:40px">
+    <svg class="range" viewBox="0 0 1440 180" preserveAspectRatio="none" aria-hidden="true"><path d="M0,180 L0,110 L240,50 L440,120 L660,40 L880,120 L1100,50 L1320,120 L1440,70 L1440,180Z" fill="#1c3357"/></svg>
+    <div class="inner wrap" style="align-items:stretch">
+      <div class="diff" style="width:100%">
+        <div class="dh">Why this<br>is different</div>
+        <div class="di2"><span class="ring"><svg viewBox="0 0 24 24"><circle class="ic" cx="11" cy="11" r="6.5"/><path class="ic" d="M20 20l-4-4"/></svg></span><div><b>Search by need, not just name</b><small>Describe your challenge in plain language.</small></div></div>
+        <div class="di2"><span class="ring"><svg viewBox="0 0 24 24"><path class="ic" d="M4 20V11M10 20V6M16 20v-9M20 20H3"/></svg></span><div><b>Surface more relevant suppliers</b><small>Our engine connects you to the best matches across Central Canada.</small></div></div>
+        <div class="di2"><span class="ring"><svg viewBox="0 0 24 24"><circle class="ic" cx="12" cy="12" r="9"/><circle class="ic" cx="12" cy="12" r="5"/><circle class="icf" cx="12" cy="12" r="1.6"/></svg></span><div><b>Create stronger buyer-intent leads</b><small>More context. Better meetings. Real business opportunities.</small></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= WHY IT MATTERS / IMAGE 3 ======================= -->
+<section class="sky-bg" id="why">
+  <svg class="range" style="top:90px;opacity:.28" viewBox="0 0 1440 200" preserveAspectRatio="none" aria-hidden="true"><path d="M0,200 L0,120 L260,44 L500,130 L720,34 L940,140 L1160,54 L1380,130 L1440,90 L1440,200Z" fill="#cddbf0"/></svg>
+  <div class="head wrap">
+    <div class="kicker">Why It Matters</div>
+    <h2>Why It <span class="gold">Matters</span></h2>
+    <p class="sub">More discoverability. Better connections. Stronger supplier ROI.</p>
+    <div style="margin-top:14px"><span class="pill">Central Canada = Ontario + Quebec</span></div>
+  </div>
+
+  <div class="matters wrap">
+    <!-- WHO BENEFITS -->
+    <div class="panel">
+      <div class="ph img" style="background-image:linear-gradient(100deg,rgba(19,38,70,.82),rgba(19,38,70,.60)),url('images/handshake.jpg')">Who Benefits</div>
+      <div class="benefits">
+        <div class="brow">
+          <div class="badge"><svg viewBox="0 0 24 24"><circle class="ic" cx="9" cy="8" r="3"/><path class="ic" d="M3.5 19c0-3 2.5-5 5.5-5s5.5 2 5.5 5"/><circle class="ic" cx="16.5" cy="9" r="2.3"/><path class="ic" d="M15 14.2c2.6.2 5 2.1 5 4.8"/></svg></div>
+          <div><h4>Exhibitors &amp; Suppliers</h4><ul><li>Get discovered faster</li><li>Showcase products and services</li><li>Generate qualified leads</li><li>Extend event visibility year-round</li></ul></div>
+        </div>
+        <div class="brow">
+          <div class="badge"><svg viewBox="0 0 24 24"><path class="ic" d="M4 14a8 8 0 0 1 16 0"/><path class="ic" d="M2 14h20"/><path class="ic" d="M12 6V3M9 3h6"/></svg></div>
+          <div><h4>Mines &amp; Buyers</h4><ul><li>Find the right supplier more quickly</li><li>Search by need, not just name</li><li>Compare options more easily</li><li>Discover relevant solutions across Central Canada</li></ul></div>
+        </div>
+        <div class="brow">
+          <div class="badge"><svg viewBox="0 0 24 24"><circle class="ic" cx="6" cy="17" r="2.4"/><circle class="ic" cx="18" cy="17" r="2.4"/><circle class="ic" cx="12" cy="6" r="2.4"/><path class="ic" d="M11 8L7.5 15M13 8l3.5 7M8 17h8"/></svg></div>
+          <div><h4>The Ecosystem</h4><ul><li>Connects physical, digital, and editorial channels</li><li>Turns content into commercial discovery</li><li>Builds stronger supplier-buyer relationships</li></ul></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DISCOVERABILITY LEVELS -->
+    <div class="panel">
+      <div class="ph img" style="background-image:linear-gradient(100deg,rgba(19,38,70,.82),rgba(19,38,70,.60)),url('images/laptop.jpg')">Discoverability Levels</div>
+      <div class="levels">
+        <div class="lev">
+          <div class="badge"><svg viewBox="0 0 24 24"><circle class="ic" cx="11" cy="11" r="6.5"/><path class="ic" d="M20 20l-4-4"/></svg></div>
+          <h4>Presence</h4>
+          <p class="desc">Searchable company profile and services.</p>
+          <div class="lnum">Level 1</div><div class="ltag">Be Found</div>
+        </div>
+        <div class="lev">
+          <div class="badge"><svg viewBox="0 0 24 24"><path class="ic" d="M5 4h11v16H5z"/><path class="ic" d="M16 8h3v10a2 2 0 0 1-2 2h-1"/><path class="ic" d="M8 8h5M8 11h5M8 14h5"/></svg></div>
+          <h4>Enhanced Discoverability</h4>
+          <p class="desc">Products indexed, microsite, faceted visibility.</p>
+          <div class="lnum">Level 2</div><div class="ltag">Stand Out</div>
+        </div>
+        <div class="lev">
+          <div class="badge"><svg viewBox="0 0 24 24"><rect class="ic" x="4" y="5" width="16" height="15" rx="2"/><path class="ic" d="M4 9h16M8 3v4M16 3v4"/></svg></div>
+          <h4>Connected Discoverability</h4>
+          <p class="desc">Event integration, booth discovery, contextual placement, lead capture.</p>
+          <div class="lnum">Level 3</div><div class="ltag">Make Connections</div>
+        </div>
+        <div class="lev">
+          <div class="badge"><svg viewBox="0 0 24 24"><path class="ic" d="M4 20V11M10 20V6M16 20v-9M20 20H3"/></svg></div>
+          <h4>Intelligence / Premium</h4>
+          <p class="desc">Project matching, buyer-intent analytics, opportunity alerts.</p>
+          <div class="lnum">Level 4</div><div class="ltag">Turn Opportunities Into Growth</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- band -->
+  <div class="band" style="margin-top:44px">
+    <svg class="range" viewBox="0 0 1440 180" preserveAspectRatio="none" aria-hidden="true"><path d="M0,180 L0,110 L240,50 L440,120 L660,40 L880,120 L1100,50 L1320,120 L1440,70 L1440,180Z" fill="#1c3357"/></svg>
+    <div class="inner wrap">
+      <div class="btitle">Be discovered wherever <span class="gold">Ontario and Quebec's</span> mining industry is looking.<br><span style="font-size:15px;font-weight:600;color:#cdd9ee;font-family:var(--body)">From trade shows to digital discovery to industry news, we connect the right need with the right supplier.</span></div>
+      <div class="btag">Ontario + Quebec<br><b>A Richer Mining Tomorrow.</b></div>
+    </div>
+  </div>
+</section>
+
+<div class="foot-final">Manitoba &bull; Ontario &bull; Quebec &nbsp;—&nbsp; <b>A Richer Mining Tomorrow.</b> &nbsp;|&nbsp; CME / CEN-CAN Expos &bull; Mining Life Online &bull; Mining Life &amp; Exploration News</div>
+
+</body>
+</html>
