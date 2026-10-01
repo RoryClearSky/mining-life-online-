@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Book Your Call — Mining Discovery Network</title>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#1b2f52; --navy-2:#16294a; --navy-3:#0f1d33; --navy-4:#0a1424;
+    --gold:#c69a3f; --gold-lt:#e3bd60; --gold-dk:#9a7526;
+    --pill:#dbe4f3; --pill-ink:#1b2f52;
+    --ink:#22344f; --muted:#5d6f88; --muted-2:#7e8ba0;
+    --sky:#eef4fc; --sky-2:#e3ecf8; --line:#e4eaf3; --card:#fff;
+    --shadow:0 12px 34px rgba(20,40,70,.12); --shadow-sm:0 6px 18px rgba(20,40,70,.09);
+    --disp:'Archivo',system-ui,sans-serif; --body:'Inter',system-ui,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--sky);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased}
+  a{color:inherit}
+  .top{background:linear-gradient(100deg,var(--navy-3),var(--navy));color:#fff;padding:22px 20px}
+  .top .wrap{max-width:1040px;margin:0 auto;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+  .back{font-family:var(--disp);font-weight:700;font-size:14px;color:#cdd9ee;text-decoration:none;border:1px solid rgba(255,255,255,.25);border-radius:100px;padding:7px 15px}
+  .back:hover{background:rgba(255,255,255,.1)}
+  .top h1{font-family:var(--disp);font-weight:900;text-transform:uppercase;font-size:clamp(22px,2.6vw,30px);margin:0;letter-spacing:.01em}
+  .top .pill{margin-left:auto;background:var(--gold);color:var(--navy-4);font-family:var(--disp);font-weight:800;font-size:13px;letter-spacing:.04em;text-transform:uppercase;border-radius:100px;padding:6px 14px}
+
+  .wrap{max-width:1040px;margin:0 auto;padding:26px 20px 60px}
+  .lead{color:var(--muted);font-size:16px;margin:0 0 22px;max-width:640px}
+  .lead b{color:var(--ink)}
+
+  .grid{display:grid;grid-template-columns:260px 1fr;gap:20px;align-items:start}
+  @media(max-width:720px){.grid{grid-template-columns:1fr}}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow-sm);padding:18px}
+  .ch{font-family:var(--disp);font-weight:800;text-transform:uppercase;letter-spacing:.04em;font-size:13px;color:var(--muted);margin:0 0 14px}
+
+  /* day list */
+  .day{display:flex;align-items:center;gap:12px;width:100%;text-align:left;border:1px solid var(--line);background:#fff;border-radius:11px;padding:11px 13px;margin-bottom:9px;cursor:pointer;transition:.12s;font-family:var(--body)}
+  .day:hover{border-color:var(--navy)}
+  .day.on{background:var(--navy);border-color:var(--navy);color:#fff}
+  .day .dnum{font-family:var(--disp);font-weight:900;font-size:22px;line-height:1;width:34px;text-align:center}
+  .day .dmeta b{display:block;font-family:var(--disp);font-weight:700;font-size:15px}
+  .day .dmeta small{font-size:12.5px;color:var(--muted)}
+  .day.on .dmeta small{color:#b9c6d4}
+
+  /* slots */
+  .slotwrap .sub{font-family:var(--disp);font-weight:700;font-size:15px;color:var(--navy);margin:0 0 14px}
+  .period{font-family:var(--disp);font-weight:700;text-transform:uppercase;letter-spacing:.06em;font-size:12.5px;color:var(--muted-2);margin:14px 0 8px}
+  .period:first-child{margin-top:0}
+  .slots{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:9px}
+  .slot{font-family:var(--disp);font-weight:700;font-size:14.5px;border:1px solid var(--line);background:#fff;color:var(--navy);border-radius:9px;padding:11px 6px;text-align:center;cursor:pointer;transition:.12s}
+  .slot:hover{border-color:var(--navy);transform:translateY(-1px)}
+  .slot.on{background:var(--gold);border-color:var(--gold);color:var(--navy-4)}
+  .slot.taken{background:var(--sky-2);color:var(--muted-2);border-style:dashed;cursor:not-allowed;text-decoration:line-through}
+
+  .bar{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:20px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 18px;box-shadow:var(--shadow-sm)}
+  .bar .summary{font-size:15px;color:var(--muted)}
+  .bar .summary b{color:var(--navy);font-family:var(--disp);font-weight:800}
+  .book{margin-left:auto;background:var(--navy);color:#fff;font-family:var(--disp);font-weight:800;font-size:16px;border:none;border-radius:100px;padding:13px 30px;cursor:pointer;transition:.15s}
+  .book:enabled:hover{background:var(--navy-3);transform:translateY(-2px)}
+  .book:disabled{opacity:.45;cursor:not-allowed}
+
+  .done{display:none;text-align:center;background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:34px 24px;margin-top:4px}
+  .done.show{display:block}
+  .done .chk{width:60px;height:60px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;margin:0 auto 14px}
+  .done h2{font-family:var(--disp);font-weight:900;text-transform:uppercase;color:var(--navy);margin:0 0 6px;font-size:24px}
+  .done p{color:var(--muted);font-size:16px;margin:0 auto;max-width:460px}
+  .done .det{font-family:var(--disp);font-weight:800;color:var(--navy);font-size:18px;margin:12px 0}
+  .again{margin-top:16px;background:none;border:1px solid var(--line);border-radius:100px;padding:9px 18px;font-family:var(--disp);font-weight:700;font-size:14px;color:var(--muted);cursor:pointer}
+</style>
+</head>
+<body>
+  <div class="top"><div class="wrap">
+    <a class="back" href="central-canada-mining-network.html">&larr; Back</a>
+    <h1>Book Your Call</h1>
+    <span class="pill">Founders Special · 15 min</span>
+  </div></div>
+
+  <div class="wrap">
+    <p class="lead">Grab a quick <b>15-minute call</b> to claim your spot in the <b>Founders Special</b> — priority placement across CME / CEN-CAN Expos, Mining Life Online, and Mining Life &amp; Exploration News.</p>
+
+    <div id="booker">
+      <div class="grid">
+        <div class="card">
+          <div class="ch">Pick a day</div>
+          <div id="days"></div>
+        </div>
+        <div class="card slotwrap">
+          <div class="ch">Available times <span style="font-weight:600;text-transform:none;letter-spacing:0;color:var(--muted-2)">· 15-minute slots · ET</span></div>
+          <div class="sub" id="dayLabel">Select a day to see times</div>
+          <div id="slots"></div>
+        </div>
+      </div>
+
+      <div class="bar">
+        <div class="summary" id="summary">Choose a day and time to continue.</div>
+        <button class="book" id="book" disabled>Confirm booking</button>
+      </div>
+    </div>
+
+    <div class="done" id="done">
+      <div class="chk"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="#0a1424" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4.5 4.5L19 7"/></svg></div>
+      <h2>You're booked!</h2>
+      <p>We've reserved your 15-minute Founders call. A calendar invite is on its way.</p>
+      <div class="det" id="doneDet"></div>
+      <button class="again" id="again">Book a different time</button>
+    </div>
+  </div>
+
+<script>
+  var MONTHS=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  var WD=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  var sel={day:null, slot:null};
+
+  // next 6 business days
+  function businessDays(n){ var out=[], d=new Date(); d.setHours(0,0,0,0);
+    while(out.length<n){ d.setDate(d.getDate()+1); var wd=d.getDay(); if(wd!==0&&wd!==6) out.push(new Date(d)); } return out; }
+  var days=businessDays(6);
+
+  // 15-min slots, morning + afternoon; deterministically mark a few taken
+  function buildSlots(dayIdx){
+    function range(startH, startM, endH, endM){ var out=[],h=startH,m=startM;
+      while(h<endH||(h===endH&&m<=endM)){ out.push({h:h,m:m}); m+=15; if(m>=60){m=0;h++;} } return out; }
+    var am=range(9,0,11,45), pm=range(13,0,15,45);
+    return {am:am, pm:pm};
+  }
+  function fmt(s){ var h=s.h, ap=h<12?'AM':'PM'; var hh=h%12; if(hh===0)hh=12; return hh+':'+(s.m<10?'0':'')+s.m+' '+ap; }
+  function isTaken(dayIdx,s){ return ((dayIdx*7 + s.h*4 + s.m/15) % 5) === 0; }
+
+  var daysEl=document.getElementById('days'), slotsEl=document.getElementById('slots'),
+      dayLabel=document.getElementById('dayLabel'), summary=document.getElementById('summary'),
+      bookBtn=document.getElementById('book');
+
+  days.forEach(function(d,i){
+    var b=document.createElement('button'); b.className='day';
+    b.innerHTML='<span class="dnum">'+d.getDate()+'</span><span class="dmeta"><b>'+WD[d.getDay()]+'</b><small>'+MONTHS[d.getMonth()]+' '+d.getDate()+'</small></span>';
+    b.onclick=function(){ document.querySelectorAll('.day').forEach(function(x){x.classList.remove('on');}); b.classList.add('on');
+      sel.day=i; sel.slot=null; renderSlots(i); update(); };
+    daysEl.appendChild(b);
+  });
+
+  function renderSlots(i){
+    var d=days[i]; dayLabel.textContent=WD[d.getDay()]+', '+MONTHS[d.getMonth()]+' '+d.getDate();
+    var s=buildSlots(i); var html='<div class="period">Morning</div><div class="slots">';
+    s.am.forEach(function(t){ html+=slotBtn(i,t); }); html+='</div>';
+    html+='<div class="period">Afternoon</div><div class="slots">';
+    s.pm.forEach(function(t){ html+=slotBtn(i,t); }); html+='</div>';
+    slotsEl.innerHTML=html;
+    slotsEl.querySelectorAll('.slot:not(.taken)').forEach(function(btn){ btn.onclick=function(){
+      slotsEl.querySelectorAll('.slot').forEach(function(x){x.classList.remove('on');}); btn.classList.add('on');
+      sel.slot=btn.dataset.t; update(); }; });
+  }
+  function slotBtn(i,t){ var taken=isTaken(i,t); var label=fmt(t);
+    return '<div class="slot'+(taken?' taken':'')+'" data-t="'+label+'">'+label+'</div>'; }
+
+  function update(){
+    if(sel.day!=null && sel.slot){ var d=days[sel.day];
+      summary.innerHTML='<b>'+WD[d.getDay()]+', '+MONTHS[d.getMonth()]+' '+d.getDate()+'</b> at <b>'+sel.slot+'</b> ET · 15 min';
+      bookBtn.disabled=false;
+    } else { summary.textContent='Choose a day and time to continue.'; bookBtn.disabled=true; }
+  }
+
+  bookBtn.onclick=function(){ var d=days[sel.day];
+    document.getElementById('booker').style.display='none';
+    document.getElementById('doneDet').textContent=WD[d.getDay()]+', '+MONTHS[d.getMonth()]+' '+d.getDate()+' · '+sel.slot+' ET (15 min)';
+    document.getElementById('done').classList.add('show');
+    window.scrollTo({top:0,behavior:'smooth'});
+  };
+  document.getElementById('again').onclick=function(){
+    document.getElementById('done').classList.remove('show');
+    document.getElementById('booker').style.display='';
+    sel.slot=null; slotsEl.querySelectorAll('.slot').forEach(function(x){x.classList.remove('on');}); update();
+  };
+
+  // preselect first day
+  daysEl.firstChild.click();
+</script>
+</body>
+</html>
